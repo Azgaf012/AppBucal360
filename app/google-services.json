@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "920489370211",
+    "project_id": "app-bucal-360",
+    "storage_bucket": "app-bucal-360.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:920489370211:android:d5707d5159bbac9b948e56",
+        "android_client_info": {
+          "package_name": "com.dapm.appbucal360"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "920489370211-vbek31ger7gj3mnh9eqjops8khp3k6ds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVr_CfVBXVN1WkXqKTXiQM0cz-PdVoIPM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "920489370211-vbek31ger7gj3mnh9eqjops8khp3k6ds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
