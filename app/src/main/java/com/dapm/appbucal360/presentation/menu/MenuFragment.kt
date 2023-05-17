@@ -1,4 +1,4 @@
-package com.dapm.appbucal360.presentation.register
+package com.dapm.appbucal360.presentation.menu
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,25 +8,25 @@ import android.view.View
 import android.view.ViewGroup
 import com.dapm.appbucal360.R
 
-class RegisterFragment : Fragment() {
+class MenuFragment : Fragment() {
 
     companion object {
-        fun newInstance() = RegisterFragment()
+        fun newInstance() = MenuFragment()
     }
 
-    private lateinit var viewModel: RegisterViewModel
+    private lateinit var viewModel: MenuViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_register, container, false)
+        return inflater.inflate(R.layout.fragment_menu, container, false)
     }
 
     @Deprecated("Deprecated in Java")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MenuViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

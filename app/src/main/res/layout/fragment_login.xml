@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="AppBucal360"
             android:textSize="60sp"
             android:layout_marginTop="60dp"
             android:fontFamily="@font/cakecafe"/>
@@ -27,6 +27,7 @@
             android:layout_marginTop="8dp" />
 
         <EditText
+            android:id="@+id/input_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Correo electronico"
@@ -39,6 +40,7 @@
             android:background="@drawable/edit_custom"/>
 
         <EditText
+            android:id="@+id/input_password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Clave"
@@ -59,6 +61,7 @@
         android:gravity="center_horizontal" >
 
         <Button
+            android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Iniciar sesion"
@@ -68,14 +71,12 @@
             android:background="@drawable/rounded_button"/>
 
         <TextView
-            android:id="@+id/register_text_view"
+            android:id="@+id/txt_registro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Registrate"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"/>
-
-
 
     </LinearLayout>
 
