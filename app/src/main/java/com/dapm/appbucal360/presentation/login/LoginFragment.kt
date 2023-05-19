@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.dapm.appbucal360.R
 import com.google.android.material.snackbar.Snackbar
@@ -33,6 +33,7 @@ class LoginFragment : Fragment() {
         val passwordEditText = view.findViewById<EditText>(R.id.input_password)
         val loginButton = view.findViewById<Button>(R.id.btn_login)
 
+        /**[IMPLEMENTAR] Modificar el Gone del modal para que sea visible al hacer clic en olvidé mi contraseña**/
 
         val registerTextView = view.findViewById<TextView>(R.id.txt_registro)
         registerTextView.setOnClickListener {

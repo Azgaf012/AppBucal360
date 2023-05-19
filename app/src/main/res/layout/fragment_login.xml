@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -37,7 +38,8 @@
             android:inputType="textEmailAddress"
             android:textSize="15sp"
             android:padding="15dp"
-            android:background="@drawable/edit_custom"/>
+            android:background="@drawable/edit_custom"
+            android:autofillHints="emailAddress" />
 
         <EditText
             android:id="@+id/input_password"
@@ -50,7 +52,9 @@
             android:inputType="textPassword"
             android:textSize="15sp"
             android:padding="15dp"
-            android:background="@drawable/edit_custom" />
+            android:background="@drawable/edit_custom"
+             />
+
     </LinearLayout>
 
     <LinearLayout
@@ -71,12 +75,335 @@
             android:background="@drawable/rounded_button"/>
 
         <TextView
+            android:id="@+id/rxt_modal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Olvidé mi contraseña"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
             android:id="@+id/txt_registro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Registrate"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"/>
+
+    </LinearLayout>
+
+    <!--Modal OLVIDÉ MI CONTRASEÑA -->
+    <LinearLayout
+        android:id="@+id/modal_olvidéContraseña"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/modal_background"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+        <!-- android:visibility="gone" :controla la visibilidad del layout "gone" = oculto -->
+
+
+        <!-- Cuerpo del modal -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="50dp"
+            android:text="Olvidé mi contraseña"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="20dp"
+            android:text="Ingresa tu correo electronico para verificar el proceso."
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="20dp"
+            android:text="Enviaremos un código de 4 dígitos a tu correo electronico."
+            android:textSize="15sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/contenedor_inputCorreo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="16dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="15dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputCorreo_modal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#C4C9E8"
+                android:hint="Correo electronico"
+                android:textColor="#9C9999" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/boton_cancelar_primeraVista"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_weight="1"
+                android:text="Cancelar" />
+
+            <Button
+                android:id="@+id/boton_continuar_primeraVista"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_weight="1"
+                android:text="Continuar" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- MODAL INGRESE DÍGITOS -->
+
+    <LinearLayout
+        android:id="@+id/modal_digitos"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/modal_background"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+        <!-- android:visibility="gone" :controla la visibilidad del layout "gone" = oculto -->
+
+
+        <!-- Cuerpo del modal -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="50dp"
+            android:text="Ingrese el Código de 4 Dígitos"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="20dp"
+            android:text="Ingresa el código de 4 dígitos que recibiste en tu correo electrónico."
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:id="@+id/contenedor_digitos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/primer_digito"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_weight="1"
+                android:background="#C4C9E8"
+                android:hint="X"
+                android:textColorHint="#3F51B4"
+                android:textAlignment="center"
+                android:textColor="#3F51B4"
+                android:textSize="40sp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/segundo_digito"
+                android:layout_width="wrap_content"
+                android:layout_height="75dp"
+                android:layout_marginLeft="25dp"
+                android:layout_weight="1"
+                android:background="#C4C9E8"
+                android:textColorHint="#3F51B4"
+                android:hint="X"
+                android:textAlignment="center"
+                android:textColor="#3F51B4"
+                android:textSize="40sp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tercer_digito"
+                android:layout_width="wrap_content"
+                android:layout_height="75dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="#C4C9E8"
+                android:textColorHint="#3F51B4"
+                android:hint="X"
+                android:textAlignment="center"
+                android:textColor="#3F51B4"
+                android:textSize="40sp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cuarto_digito"
+                android:layout_width="wrap_content"
+                android:layout_height="75dp"
+                android:layout_marginRight="25dp"
+                android:layout_weight="1"
+                android:background="#C4C9E8"
+                android:textColorHint="#3F51B4"
+                android:hint="X"
+                android:textAlignment="center"
+                android:textColor="#3F51B4"
+                android:textSize="40sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/boton_regresar_segundaVista"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_weight="1"
+                android:text="Regresar" />
+
+            <Button
+                android:id="@+id/boton_continuar_segundaVista"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_weight="1"
+                android:text="Continuar" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--Modal  RESTABLECER CONTRASEÑA -->
+    <LinearLayout
+        android:id="@+id/modal_restablecer"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/modal_background"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+        <!-- android:visibility="gone" :controla la visibilidad del layout "gone" = oculto -->
+
+
+        <!-- Cuerpo del modal -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="50dp"
+            android:text="Restablecer Contraseña"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:paddingTop="15dp"
+            android:paddingEnd="20dp"
+            android:text="Ingresa tu nueva contraseña con la que podras ingresar y acceder a todas las funcionalidades."
+            android:textSize="15sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="16dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="15dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nueva_Contraseña"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#C4C9E8"
+                android:inputType="textPassword"
+                android:drawableRight="@drawable/ic_eye_closed"
+                android:drawableEnd="@drawable/ic_eye_closed"
+                android:hint="Nueva contraseña"
+                android:textColor="#9C9999" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="16dp"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="15dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Again_nueva_contraseña"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#C4C9E8"
+                android:drawableEnd="@drawable/ic_eye_closed"
+                android:drawableRight="@drawable/ic_eye_closed"
+                android:hint="Ingrese nuevamente la contraseña"
+                android:inputType="textPassword"
+                android:textColor="#9C9999" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/boton_regresar_terceraVista"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_weight="1"
+                android:text="Regresar" />
+
+            <Button
+                android:id="@+id/boton_Actualizar_contraseña"
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_weight="1"
+                android:text="Actualizar" />
+        </LinearLayout>
 
     </LinearLayout>
 
