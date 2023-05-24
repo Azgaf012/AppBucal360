@@ -37,6 +37,12 @@ class MenuFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_menuFragment_to_citasFragment)
         }
 
+        val regCita = view.findViewById<ImageButton>(R.id.firstOptionHome)
+
+        regCita.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_menuFragment_to_regCitaFragment)
+        }
+
         viewModel = ViewModelProvider(this).get(MenuViewModel::class.java)
         // TODO: Use the ViewModel
     }

@@ -35,12 +35,23 @@
             android:id="@+id/action_menuFragment_to_citasFragment"
             app:destination="@id/citasFragment" />
 
+        <action
+            android:id="@+id/action_menuFragment_to_regCitaFragment"
+            app:destination="@id/regCitaFragment" />
+
     </fragment>
 
     <fragment
         android:id="@+id/citasFragment"
         android:name="com.dapm.appbucal360.presentation.menu.citas_list.CitasFragment"
         tools:layout="@layout/fragment_citas">
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/regCitaFragment"
+        android:name="com.dapm.appbucal360.presentation.menu.reservation.pickerReservationFragment"
+        tools:layout="@layout/fragment_picker_reservation">
     </fragment>
 
 </navigation>

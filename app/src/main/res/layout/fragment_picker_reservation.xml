@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <LinearLayout
@@ -24,19 +24,22 @@
             android:paddingTop="20dp">
 
             <ImageButton
-                android:id="@+id/btn_regresar_pickerReservationToReservation"
+                android:id="@+id/imageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                app:srcCompat="?attr/homeAsUpIndicator" />
+                android:background="@drawable/rounded_button"
+                app:srcCompat="?attr/homeAsUpIndicator"
+                app:tint="#5011BF" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
-                android:layout_height="16dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="15dp"
+                android:layout_marginLeft="20dp"
                 android:text="Reservación"
+                android:textColor="@android:color/black"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -46,78 +49,57 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.55"
+            android:layout_weight="0.6"
             android:headerBackground="@color/design_default_color_primary" />
 
         <LinearLayout
+            android:id="@+id/margi"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.35"
+            android:layout_weight="0.15"
+            android:gravity="bottom"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginRight="10dp"
-                android:text="Horas disponibles" />
+                android:text="Horas Disponibles" />
 
-            <HorizontalScrollView
-                android:layout_width="match_parent"
+            <Spinner
+                android:id="@+id/spinner_horas_disponibles"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
-
-                <LinearLayout
-                    android:id="@+id/contenedorHoras"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/hora1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:text="Button" />
-                </LinearLayout>
-            </HorizontalScrollView>
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:entries="@array/horas_disponibles" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
-                android:text="Recordarme antes de:" />
+                android:text="Doctores Disponibles" />
 
-            <HorizontalScrollView
-                android:layout_width="match_parent"
+            <Spinner
+                android:id="@+id/spinner_doctores_disponibles"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:entries="@array/doctores_disponibles" />
 
-                <LinearLayout
-                    android:id="@+id/contenedorHorasRecordatorio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="10dp"
-                    android:orientation="horizontal">
+        </LinearLayout>
 
-                    <Button
-                        android:id="@+id/horaRecordatorio1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_weight="1"
-                        android:text="Button" />
-                </LinearLayout>
-            </HorizontalScrollView>
+        <LinearLayout
+            android:id="@+id/margin"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.11"
+            android:gravity="bottom"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btn_confirmarReservation"
@@ -125,11 +107,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginRight="10dp"
-                android:text="Button" />
-        </LinearLayout>
+                android:layout_marginBottom="20dp"
+                android:text="Registrar Cita" />
 
+        </LinearLayout>
 
     </LinearLayout>
 
