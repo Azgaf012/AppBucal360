@@ -3,5 +3,5 @@
         android:startColor="#FFFFFF"
         android:endColor="#D2BFF4"
         android:type="linear"
-        android:angle="40" /> <!-- Ángulo del gradiente (0 = horizontal, 45 = diagonal, 90 = vertical) -->
+        android:angle="45" /> <!-- Ángulo del gradiente (0 = horizontal, 45 = diagonal, 90 = vertical) -->
 </shape>
