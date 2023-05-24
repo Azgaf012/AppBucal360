@@ -212,7 +212,7 @@
                 app:layout_constraintTop_toTopOf="@+id/layout1">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/TextoBarraDeBusqueda"
+                    android:id="@+id/btn_buscar_cita"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/search_layout"

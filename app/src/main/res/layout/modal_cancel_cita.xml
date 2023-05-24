@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Contenido del layout principal -->
+    <LinearLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- Contenido del layout principal -->
+
+    </LinearLayout>
+
+    <!-- Modal -->
+    <RelativeLayout
+        android:id="@+id/modal_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000">
+
+        <!-- Contenido del modal -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="#ffffff"
+            android:orientation="vertical">
+
+            <!-- Botón de cerrar -->
+            <ImageView
+                android:id="@+id/btn_close"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="end"
+                android:layout_margin="3dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_close" />
+
+            <!-- Pregunta -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="¿Deseas cancelar esta cita?"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Botón de cancelar -->
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/btn_cancel_bg"
+                android:text="Cancelar"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- Contenido adicional del modal -->
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
