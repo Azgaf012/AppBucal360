@@ -30,7 +30,17 @@
         android:id="@+id/menuFragment"
         android:name="com.dapm.appbucal360.presentation.menu.MenuFragment"
         tools:layout="@layout/fragment_menu">
+
+        <action
+            android:id="@+id/action_menuFragment_to_citasFragment"
+            app:destination="@id/citasFragment" />
+
     </fragment>
 
+    <fragment
+        android:id="@+id/citasFragment"
+        android:name="com.dapm.appbucal360.presentation.menu.citas_list.CitasFragment"
+        tools:layout="@layout/fragment_citas">
+    </fragment>
 
 </navigation>
