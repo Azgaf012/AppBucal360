@@ -49,8 +49,11 @@
 
     <fragment
         android:id="@+id/regCitaFragment"
-        android:name="com.dapm.appbucal360.presentation.menu.reservation.pickerReservationFragment"
-        tools:layout="@layout/fragment_picker_reservation">
+        android:name="com.dapm.appbucal360.presentation.menu.reservation.reservationFragment"
+        tools:layout="@layout/fragment_reservation">
+        <action
+            android:id="@+id/action_reservationFragment_to_citasFragment"
+            app:destination="@id/citasFragment" />
     </fragment>
 
 </navigation>
