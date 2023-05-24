@@ -3,4 +3,8 @@
     <string name="email">Ingrese su email</string>
     <string name="password">Ingrese su contraseña</string>
     <string name="register">Registrarse</string>
+    <string name="first_name">Ingrese su nombre</string>
+    <string name="last_name">Ingrese su apellido</string>
+    <string name="phone_number">Ingrese su telefono</string>
+    <string name="birth_date">Ingrese su fecha nac.</string>
 </resources>
