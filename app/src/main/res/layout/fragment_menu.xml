@@ -105,6 +105,16 @@
                                     android:background="@drawable/home_buttons_layout"
                                     android:scaleType="fitCenter"
                                     android:src="@drawable/ic_home_tooth" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="Reserva una Cita"
+                                    android:textColor="#000000"
+                                    android:layout_marginTop="5dp"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -121,7 +131,17 @@
                                     android:adjustViewBounds="true"
                                     android:background="@drawable/home_buttons_layout"
                                     android:scaleType="fitCenter"
-                                    android:src="@drawable/ic_home_eye" />
+                                    android:src="@drawable/ic_home_eye"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_marginTop="5dp"
+                                    android:text="Mis Citas"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
                             </LinearLayout>
 
                         </LinearLayout>

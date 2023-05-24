@@ -8,10 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.LinearLayout
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.dapm.appbucal360.R
 import com.google.firebase.Timestamp
@@ -91,15 +88,22 @@ class CitasFragment : Fragment() {
             val cita = getItem(position)
 
             if (view == null) {
-                view = LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1, parent, false)
+                view = LayoutInflater.from(context).inflate(R.layout.list_item_cita, parent, false)
             }
 
-            val textView = view?.findViewById<TextView>(android.R.id.text1)
+            val textView = view?.findViewById<TextView>(R.id.text1)
+            val button = view?.findViewById<Button>(R.id.button1)
+
             textView?.text = cita
             textView?.setTextColor(Color.BLACK)
             textView?.setTypeface(null, Typeface.BOLD)
             textView?.textSize = 18f
             textView?.setPadding(50, 10, 0, 10)
+
+            button?.setOnClickListener {
+                // Acción que se realizará al hacer clic en el botón
+                // Puedes implementar aquí la redirección o cualquier otra lógica que desees
+            }
 
             return view!!
         }
