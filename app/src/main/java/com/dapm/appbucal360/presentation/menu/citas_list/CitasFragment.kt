@@ -93,7 +93,7 @@ class CitasFragment : Fragment() {
             }
 
             val textView = view?.findViewById<TextView>(R.id.text1)
-            val button = view?.findViewById<Button>(R.id.button1)
+            val button = view?.findViewById<ImageButton>(R.id.button1)
 
 
             textView?.text = cita
