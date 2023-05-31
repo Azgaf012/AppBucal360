@@ -44,6 +44,9 @@
         android:id="@+id/citasFragment"
         android:name="com.dapm.appbucal360.presentation.menu.citas_list.CitasFragment"
         tools:layout="@layout/fragment_citas">
+        <action
+            android:id="@+id/action_citasFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
 
 

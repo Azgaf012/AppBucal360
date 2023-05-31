@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.dapm.appbucal360.R
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
@@ -94,6 +95,7 @@ class CitasFragment : Fragment() {
             val textView = view?.findViewById<TextView>(R.id.text1)
             val button = view?.findViewById<Button>(R.id.button1)
 
+
             textView?.text = cita
             textView?.setTextColor(Color.BLACK)
             textView?.setTypeface(null, Typeface.BOLD)
@@ -105,7 +107,19 @@ class CitasFragment : Fragment() {
                 // Puedes implementar aquí la redirección o cualquier otra lógica que desees
             }
 
+
+
             return view!!
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val back = view.findViewById<ImageButton>(R.id.imageButton)
+
+        back.setOnClickListener {
+                Navigation.findNavController(view).navigate(R.id.action_citasFragment_to_menuFragment)
         }
     }
 }
