@@ -88,8 +88,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:entries="@array/doctores_disponibles" />
+                android:layout_marginTop="5dp" />
+
 
         </LinearLayout>
 
