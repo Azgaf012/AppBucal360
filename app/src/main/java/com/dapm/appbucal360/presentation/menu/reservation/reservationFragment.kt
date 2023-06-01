@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.DatePicker
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -39,18 +40,39 @@ class reservationFragment : Fragment() {
 
         val patientNameEditText = "Prueba"//view.findViewById<TextInputEditText>(R.id.inputNombrePaciente)
         val patientContactNumberEditText = "999888999"//view.findViewById<TextInputEditText>(R.id.inputNumeroContactoPaciente)
+        val datePicker = view.findViewById<DatePicker>(R.id.datePicker_cita)
         val reserveButton = view.findViewById<Button>(R.id.btn_confirmarReservation)
 
         fetchDataFromFirestore()
 
         reserveButton.setOnClickListener {
             val doctor = doctorNameSpinner.selectedItem.toString()
+            val timeSpinner = view.findViewById<Spinner>(R.id.spinner_horas_disponibles)
             val patientName = "Prueba"
             val patientContactNumber = "999888999"
-            val date = Date()  // Debes obtener la fecha de algún lado. Por ahora, solo estoy utilizando la fecha actual.
+            val day = datePicker.dayOfMonth
+            val month = datePicker.month
+            val year = datePicker.year
+            val calendar = Calendar.getInstance()
+            calendar.set(year, month, day)
+
+            val selectedTime = timeSpinner.selectedItem.toString()
+
+            // Extraer solo la parte numérica de la cadena de horas
+            val numericTime = selectedTime.replace(Regex("[^0-9:]"), "")
+
+            val timeParts = numericTime.split(":")
+            val selectedHour = timeParts[0].toInt()
+            val selectedMinute = timeParts[1].toInt()
+
+            calendar.set(Calendar.HOUR_OF_DAY, selectedHour)
+            calendar.set(Calendar.MINUTE, selectedMinute)
+
+            val date = calendar.time
 
             viewModel.registerAppointment(doctor, date)
         }
+
 
         viewModel.registerResult.observe(viewLifecycleOwner, Observer { appointmentState ->
             when (appointmentState) {

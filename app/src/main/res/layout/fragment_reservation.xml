@@ -45,7 +45,7 @@
         </LinearLayout>
 
         <DatePicker
-            android:id="@+id/datePicker"
+            android:id="@+id/datePicker_cita"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_gravity="center_horizontal"

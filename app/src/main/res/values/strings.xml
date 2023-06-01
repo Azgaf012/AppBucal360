@@ -8,9 +8,9 @@
     <string name="phone_number">Ingrese su telefono</string>
     <string name="birth_date">Ingrese su fecha nac.</string>
     <string-array name="horas_disponibles">
-        <item>7:00am - 8:00am</item>
-        <item>8:00am - 9:00am</item>
-        <item>9:00am - 10:00am</item>
+        <item>7:00am</item>
+        <item>8:00am</item>
+        <item>9:00am</item>
     </string-array>
     <string-array name="doctores_disponibles">
         <item>Seleccione un doctor</item>
