@@ -11,7 +11,7 @@
         android:layout_weight="1" />
 
     <ImageButton
-        android:id="@+id/button_editar"
+        android:id="@+id/editar_cita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -21,7 +21,7 @@
         app:tint="#FFC107" />
 
     <ImageButton
-        android:id="@+id/button1"
+        android:id="@+id/eliminar_cita"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
