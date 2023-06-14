@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/citasFragment"
-        android:name="com.dapm.appbucal360.presentation.menu.citas_list.CitasFragment"
+        android:name="com.dapm.appbucal360.presentation.appointment.ShowAppointmentFragment"
         tools:layout="@layout/fragment_citas">
         <action
             android:id="@+id/action_citasFragment_to_menuFragment"
@@ -52,8 +52,8 @@
 
     <fragment
         android:id="@+id/regCitaFragment"
-        android:name="com.dapm.appbucal360.presentation.menu.reservation.reservationFragment"
-        tools:layout="@layout/fragment_reservation">
+        android:name="com.dapm.appbucal360.presentation.appointment.ReserveAppointmentFragment"
+        tools:layout="@layout/fragment_reserve_appointment">
         <action
             android:id="@+id/action_reservationFragment_to_citasFragment"
             app:destination="@id/citasFragment" />

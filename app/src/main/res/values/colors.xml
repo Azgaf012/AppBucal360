@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="btn_color">#6000F4</color>
-
-    <color name="dark_primary_color">#303F9F</color>
-    <color name="light_primary_color">#C5CAE9</color>
-    <color name="primary_color">#3F51B5</color>
-    <color name="text_icon">#FFFFFF</color>
-    <color name="accent_color">#607D8B</color>
-    <color name="primary_text">#212121</color>
-    <color name="secundary_text">#757575</color>
-    <color name="divider_color">#BDBDBD</color>
+    <color name="primary">#1a237e</color> <!--Deep Blue-->
+    <color name="primary_dark">#000051</color> <!--Darker Blue-->
+    <color name="primary_light">#534bae</color> <!--Lighter Blue-->
+    <color name="accent">#ffab40</color> <!--Bright Peach-->
+    <color name="primary_text">#ffffff</color> <!--White for texts on primary color-->
+    <color name="secondary_text">#757575</color> <!--Dark gray for less important texts-->
+    <color name="icons">#ffffff</color> <!--White for icons-->
+    <color name="divider">#BDBDBD</color> <!--Divider color-->
+    <color name="secondary">#ff7043</color> <!--Peach-->
+    <color name="secondary_dark">#c63f17</color> <!--Darker Peach-->
+    <color name="secondary_light">#ffa270</color> <!--Lighter Peach-->
+    <color name="background">#fafafa</color>
 </resources>

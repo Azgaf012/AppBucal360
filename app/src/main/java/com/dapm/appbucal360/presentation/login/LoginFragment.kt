@@ -11,15 +11,20 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.dapm.appbucal360.R
+import com.dapm.appbucal360.presentation.common.SharedViewModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private val viewModel: LoginViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,8 +82,13 @@ class LoginFragment : Fragment() {
 
         // Observar el LiveData loggedInUser
         viewModel.loggedInUser.observe(viewLifecycleOwner, Observer { loggedInUser ->
-            // Manejar caso de éxito
-            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_menuFragment)
+            val navController = Navigation.findNavController(view)
+            if (navController.currentDestination?.id == R.id.loginFragment) {
+                Snackbar.make(view, "Bienvenido, ${loggedInUser.firstName}", Snackbar.LENGTH_LONG).show()
+                sharedViewModel.loggedInUser.value = loggedInUser
+                val action = LoginFragmentDirections.actionLoginFragmentToMenuFragment()
+                navController.navigate(action)
+            }
         })
 
         // Observar el LiveData loginError

@@ -39,7 +39,8 @@
             android:textSize="15sp"
             android:padding="15dp"
             android:background="@drawable/edit_custom"
-            android:autofillHints="emailAddress" />
+            android:autofillHints="emailAddress"
+            android:textColorHint="@color/secondary_text"/>
 
         <EditText
             android:id="@+id/input_password"
@@ -53,7 +54,7 @@
             android:textSize="15sp"
             android:padding="15dp"
             android:background="@drawable/edit_custom"
-             />
+            android:textColorHint="@color/secondary_text"/>
 
     </LinearLayout>
 
@@ -71,7 +72,7 @@
             android:text="Iniciar sesion"
             android:layout_marginRight="25dp"
             android:layout_marginLeft="25dp"
-            android:backgroundTint="@color/btn_color"
+            android:backgroundTint="@color/primary"
             android:background="@drawable/rounded_button"/>
 
         <TextView

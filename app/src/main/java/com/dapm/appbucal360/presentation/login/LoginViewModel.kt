@@ -7,14 +7,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dapm.appbucal360.data.UserRepository
 import com.dapm.appbucal360.model.user.LoggedInUser
+import com.dapm.appbucal360.model.user.User
+import com.dapm.appbucal360.presentation.common.SharedViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LoginViewModel : ViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val userRepository: UserRepository
+) : ViewModel() {
 
-    private val userRepository = UserRepository()
-
-    private val _loggedInUser = MutableLiveData<LoggedInUser>()
-    val loggedInUser: LiveData<LoggedInUser> = _loggedInUser
+    private val _loggedInUser = MutableLiveData<User>()
+    val loggedInUser: LiveData<User> = _loggedInUser
 
     private val _loginError = MutableLiveData<Throwable>()
     val loginError: LiveData<Throwable> = _loginError

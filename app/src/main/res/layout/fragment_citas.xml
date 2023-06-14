@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/home_scroll_background"
     android:orientation="vertical"
-    tools:context="com.dapm.appbucal360.presentation.menu.citas_list.CitasFragment">
+    tools:context="com.dapm.appbucal360.presentation.appointment.ShowAppointmentFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

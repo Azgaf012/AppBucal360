@@ -15,4 +15,15 @@
     <string-array name="doctores_disponibles">
         <item>Seleccione un doctor</item>
     </string-array>
+
+    <!-- Nuevas cadenas de texto -->
+    <string name="back_button">Botón atrás</string>
+    <string name="reservations">Reservaciones</string>
+    <string name="date">Fecha</string>
+    <string name="available_hours">Horas disponibles</string>
+    <string name="available_doctors">Doctores disponibles</string>
+    <string name="register_appointment">Registrar cita</string>
+
+    <string name="date_picker_year">Año</string>
+    <string name="date_picker_month">Mes</string>
 </resources>

@@ -7,17 +7,23 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import java.util.Date
+import javax.inject.Inject
 
-class UserRepository{
+class UserRepository @Inject constructor(){
 
     private val auth = FirebaseAuth.getInstance()
     val db = Firebase.firestore
 
-    suspend fun login(email: String, password: String): Result<LoggedInUser> {
+    suspend fun login(email: String, password: String): Result<User> {
         return runCatching {
             val result = auth.signInWithEmailAndPassword(email, password).await()
             val user = result.user
-            LoggedInUser(user?.uid ?: "", user?.email ?: "")
+            if (user != null) {
+                val doc = db.collection("paciente").document(user.uid).get().await()
+                doc.toObject(User::class.java) ?: throw IllegalStateException("User not found in Firestore")
+            } else {
+                throw IllegalStateException("Firebase Auth user is null")
+            }
         }
     }
 
