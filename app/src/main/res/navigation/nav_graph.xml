@@ -53,7 +53,7 @@
     <fragment
         android:id="@+id/regCitaFragment"
         android:name="com.dapm.appbucal360.presentation.appointment.ReserveAppointmentFragment"
-        tools:layout="@layout/fragment_reserve_appointment">
+        tools:layout="@layout/fragment_appointment_reserve">
         <action
             android:id="@+id/action_reservationFragment_to_citasFragment"
             app:destination="@id/citasFragment" />

@@ -7,6 +7,8 @@
     <color name="primary_text">#ffffff</color> <!--White for texts on primary color-->
     <color name="secondary_text">#757575</color> <!--Dark gray for less important texts-->
     <color name="icons">#ffffff</color> <!--White for icons-->
+    <color name="edit_icon">#4CAF50</color> <!--Green for edit icon-->
+    <color name="delete_icon">#F44336</color>
     <color name="divider">#BDBDBD</color> <!--Divider color-->
     <color name="secondary">#ff7043</color> <!--Peach-->
     <color name="secondary_dark">#c63f17</color> <!--Darker Peach-->

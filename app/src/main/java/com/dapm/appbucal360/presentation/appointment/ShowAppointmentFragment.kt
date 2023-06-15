@@ -1,16 +1,15 @@
 package com.dapm.appbucal360.presentation.appointment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import com.dapm.appbucal360.R
 import com.dapm.appbucal360.model.appointment.Appointment
 import com.dapm.appbucal360.presentation.common.SharedViewModel
@@ -18,7 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ShowAppointmentFragment : Fragment() {
+class ShowAppointmentFragment : Fragment(), AppointmentAdapter.OnAppointmentListener {
 
     private val viewModel: ShowAppointmentViewModel by viewModels()
     private val userViewModel: SharedViewModel by activityViewModels()
@@ -29,7 +28,7 @@ class ShowAppointmentFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_show_appointment, container, false)
+        return inflater.inflate(R.layout.fragment_appointment_show, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,7 +71,8 @@ class ShowAppointmentFragment : Fragment() {
     }
 
     private fun updateListView(appointments: List<Appointment>) {
-        val adapter = AppointmentAdapter(requireContext(), appointments)
+        val mutableAppointments = appointments.toMutableList()
+        val adapter = AppointmentAdapter(requireContext(), mutableAppointments, this)
         listView.adapter = adapter
     }
 
@@ -90,5 +90,21 @@ class ShowAppointmentFragment : Fragment() {
             "Cita eliminada con éxito",
             Snackbar.LENGTH_LONG
         ).show()
+    }
+
+    override fun onEdit(appointment: Appointment) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onDelete(appointment: Appointment) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Confirmar eliminación")
+            .setMessage("¿Estás seguro de que quieres eliminar esta cita?")
+            .setPositiveButton("Sí") { _, _ ->
+                appointment.id?.let { viewModel.deleteAppointment(it) }
+                (listView.adapter as AppointmentAdapter).removeAppointment(appointment)
+            }
+            .setNegativeButton("No", null)
+            .show()
     }
 }

@@ -10,7 +10,7 @@ class RegisterAppointmentUseCase @Inject constructor(private val appointmentRepo
 
     suspend operator fun invoke(
         doctor: String,
-        date: Date,
+        date: String,
         patient: User,
         time: String
     ): Result<Appointment> {
