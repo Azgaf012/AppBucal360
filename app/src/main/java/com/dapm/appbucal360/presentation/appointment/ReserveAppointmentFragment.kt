@@ -16,10 +16,15 @@ import com.dapm.appbucal360.R
 import com.dapm.appbucal360.model.appointment.AppointmentState
 import com.dapm.appbucal360.model.doctor.Doctor
 import com.dapm.appbucal360.presentation.common.SharedViewModel
+import com.dapm.appbucal360.utils.DisableDaysDecorator
+import com.dapm.appbucal360.utils.EnumDayOfWeek
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import com.prolificinteractive.materialcalendarview.CalendarMode
+import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
+import java.time.DayOfWeek
 import java.time.LocalTime
 import java.util.*
 
@@ -33,7 +38,7 @@ class ReserveAppointmentFragment : Fragment() {
     private lateinit var reserveButton: FloatingActionButton
     private lateinit var timeAutocomplete: AutoCompleteTextView
     private lateinit var selectedDate: Date
-    private lateinit var calendarView: CalendarView
+    private lateinit var calendarView: MaterialCalendarView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,13 +60,7 @@ class ReserveAppointmentFragment : Fragment() {
         reserveButton = view.findViewById(R.id.btn_confirmarReservation)
         timeAutocomplete = view.findViewById(R.id.autocomplete_horas_disponibles)
         calendarView = view.findViewById(R.id.calendarView)
-        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            val calendar = Calendar.getInstance()
-            calendar.set(year, month, dayOfMonth)
-            selectedDate = calendar.time
-        }
 
-        selectedDate = Calendar.getInstance().time
 
 
     }
@@ -91,9 +90,9 @@ class ReserveAppointmentFragment : Fragment() {
             }
         }
 
-        calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
+        calendarView.setOnDateChangedListener { widget, date, selected ->
             val calendar = Calendar.getInstance()
-            calendar.set(year, month, dayOfMonth)
+            calendar.set(date.year, date.month - 1, date.day)
             selectedDate = calendar.time
         }
 
@@ -144,8 +143,9 @@ class ReserveAppointmentFragment : Fragment() {
     }
 
     private fun updateCalendarView(doctor: Doctor) {
-        // Aquí puedes actualizar el CalendarView para que solo permita seleccionar los días en los que el doctor trabaja
-        // Esto dependerá de cómo estés utilizando el CalendarView y de cómo estés almacenando los días de trabajo en la clase Doctor
+
+        val workingDays = convertDayNamesToCalendarDays(doctor.workingDays)
+        calendarView.addDecorators(DisableDaysDecorator(workingDays))
     }
 
     private fun updateTimeAutocomplete(doctor: Doctor) {
@@ -169,4 +169,20 @@ class ReserveAppointmentFragment : Fragment() {
 
         return availableTimes
     }
+
+    private fun convertDayNamesToCalendarDays(dayNames: List<String>): List<Int> {
+        return dayNames.map { dayName ->
+            when (dayName) {
+                "Monday" -> Calendar.MONDAY
+                "Tuesday" -> Calendar.TUESDAY
+                "Wednesday" -> Calendar.WEDNESDAY
+                "Thursday" -> Calendar.THURSDAY
+                "Friday" -> Calendar.FRIDAY
+                "Saturday" -> Calendar.SATURDAY
+                "Sunday" -> Calendar.SUNDAY
+                else -> throw IllegalArgumentException("Invalid day name: $dayName")
+            }
+        }
+    }
+
 }
