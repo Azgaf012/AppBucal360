@@ -39,7 +39,7 @@ class AppointmentAdapter(
 
     private fun bindAppointmentDataToView(view: View, appointment: Appointment?) {
         val textDoctorView = view.findViewById<TextView>(R.id.appointment_doctor)
-        textDoctorView.text = appointment?.doctor
+        textDoctorView.text = "${appointment?.doctor?.name} ${appointment?.doctor?.lastName}" ?: ""
 
         val dateTimeTextView = view.findViewById<TextView>(R.id.appointment_date_time)
         dateTimeTextView.text = formatAppointmentDateTime(appointment)

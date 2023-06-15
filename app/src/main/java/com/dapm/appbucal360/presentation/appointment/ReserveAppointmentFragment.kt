@@ -1,12 +1,12 @@
 package com.dapm.appbucal360.presentation.appointment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.CalendarView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -17,14 +17,11 @@ import com.dapm.appbucal360.model.appointment.AppointmentState
 import com.dapm.appbucal360.model.doctor.Doctor
 import com.dapm.appbucal360.presentation.common.SharedViewModel
 import com.dapm.appbucal360.utils.DisableDaysDecorator
-import com.dapm.appbucal360.utils.EnumDayOfWeek
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
-import java.time.DayOfWeek
 import java.time.LocalTime
 import java.util.*
 
@@ -39,6 +36,7 @@ class ReserveAppointmentFragment : Fragment() {
     private lateinit var timeAutocomplete: AutoCompleteTextView
     private lateinit var selectedDate: Date
     private lateinit var calendarView: MaterialCalendarView
+    private var selectedDoctor: Doctor? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,25 +60,32 @@ class ReserveAppointmentFragment : Fragment() {
         calendarView = view.findViewById(R.id.calendarView)
 
 
-
     }
 
     private fun setupOnClickListeners() {
         reserveButton.setOnClickListener {
-            val selectedDoctor = doctorNameAutocomplete.text.toString()
+
             val selectedTime = timeAutocomplete.text.toString()
             val loggedInUser = userViewModel.loggedInUser.value
 
-            if (selectedDoctor.isNotEmpty() && selectedTime.isNotEmpty() && loggedInUser != null) {
-                val utcFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                utcFormat.timeZone = TimeZone.getTimeZone("UTC")
-                val selectedTextDate = utcFormat.format(selectedDate)
-                viewModel.registerAppointment(
-                    selectedDoctor,
-                    selectedTextDate,
-                    loggedInUser,
-                    selectedTime
-                )
+            if (selectedDoctor != null && selectedTime.isNotEmpty() && loggedInUser != null) {
+
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Confirmar de reserva")
+                    .setMessage("¿Estás seguro de que desea registrar esta cita?")
+                    .setPositiveButton("Sí") { _, _ ->
+                        val utcFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                        utcFormat.timeZone = TimeZone.getTimeZone("UTC")
+                        val selectedTextDate = utcFormat.format(selectedDate)
+                        viewModel.registerAppointment(
+                            selectedDoctor!!,
+                            selectedTextDate,
+                            loggedInUser,
+                            selectedTime
+                        )
+                    }
+                    .setNegativeButton("No", null)
+                    .show()
             } else {
                 Snackbar.make(
                     requireView(),
@@ -88,6 +93,8 @@ class ReserveAppointmentFragment : Fragment() {
                     Snackbar.LENGTH_LONG
                 ).show()
             }
+
+
         }
 
         calendarView.setOnDateChangedListener { widget, date, selected ->
@@ -134,22 +141,22 @@ class ReserveAppointmentFragment : Fragment() {
         doctorNameAutocomplete.setAdapter(adapter)
 
         doctorNameAutocomplete.setOnItemClickListener { parent, view, position, id ->
-            val selectedDoctor = parent.getItemAtPosition(position) as Doctor
+            selectedDoctor = parent.getItemAtPosition(position) as Doctor
 
             // Actualizar el CalendarView y el AutoCompleteTextView para las horas disponibles
-            updateCalendarView(selectedDoctor)
-            updateTimeAutocomplete(selectedDoctor)
+            updateCalendarView(selectedDoctor!!)
+            updateTimeAutocomplete(selectedDoctor!!)
         }
     }
 
     private fun updateCalendarView(doctor: Doctor) {
 
-        val workingDays = convertDayNamesToCalendarDays(doctor.workingDays)
-        calendarView.addDecorators(DisableDaysDecorator(workingDays))
+        val workingDays = doctor.workingDays?.let { convertDayNamesToCalendarDays(it) }
+        calendarView.addDecorators(workingDays?.let { DisableDaysDecorator(it) })
     }
 
     private fun updateTimeAutocomplete(doctor: Doctor) {
-        val availableTimes = generateAvailableTimes(doctor.startTime, doctor.endTime)
+        val availableTimes = generateAvailableTimes(doctor!!.startTime!!, doctor!!.endTime!!)
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_dropdown_item_1line,
@@ -158,13 +165,14 @@ class ReserveAppointmentFragment : Fragment() {
         timeAutocomplete.setAdapter(adapter)
     }
 
-    private fun generateAvailableTimes(startTime: LocalTime, endTime: LocalTime): List<String> {
+    private fun generateAvailableTimes(start: String, end: String): List<String> {
         val availableTimes = mutableListOf<String>()
-        var time = startTime
+        var startTime = LocalTime.parse(start)
+        var endTime = LocalTime.parse(end)
 
-        while (time.isBefore(endTime) || time == endTime) {
-            availableTimes.add(time.toString())
-            time = time.plusMinutes(30)
+        while (startTime.isBefore(endTime) || startTime == endTime) {
+            availableTimes.add(startTime.toString())
+            startTime = startTime.plusMinutes(30)
         }
 
         return availableTimes

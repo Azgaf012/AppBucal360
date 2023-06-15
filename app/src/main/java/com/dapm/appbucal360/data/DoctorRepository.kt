@@ -25,12 +25,12 @@ class DoctorRepository @Inject constructor() {
         val doctors = mutableListOf<Doctor>()
 
         for (document in querySnapshot) {
-            val id = UUID.fromString(document.getString("id"))
+            val id = document.getString("id")
             val name = document.getString("name") ?: ""
             val lastName = document.getString("lastName") ?: ""
             val workingDays = document.get("workingDays") as? List<String> ?: listOf()
-            val startTime = LocalTime.parse(document.getString("startTime"))
-            val endTime = LocalTime.parse(document.getString("endTime"))
+            val startTime = document.getString("startTime")
+            val endTime = document.getString("endTime")
 
             val doctor = Doctor(id, name, lastName, workingDays, startTime, endTime)
             doctors.add(doctor)

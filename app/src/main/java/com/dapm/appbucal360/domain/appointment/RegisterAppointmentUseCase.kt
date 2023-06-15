@@ -2,6 +2,7 @@ package com.dapm.appbucal360.domain.appointment
 
 import com.dapm.appbucal360.data.AppointmentRepository
 import com.dapm.appbucal360.model.appointment.Appointment
+import com.dapm.appbucal360.model.doctor.Doctor
 import com.dapm.appbucal360.model.user.User
 import java.util.Date
 import javax.inject.Inject
@@ -9,7 +10,7 @@ import javax.inject.Inject
 class RegisterAppointmentUseCase @Inject constructor(private val appointmentRepository: AppointmentRepository) {
 
     suspend operator fun invoke(
-        doctor: String,
+        doctor: Doctor,
         date: String,
         patient: User,
         time: String

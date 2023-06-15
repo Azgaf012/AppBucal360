@@ -1,6 +1,7 @@
 package com.dapm.appbucal360.data
 
 import com.dapm.appbucal360.model.appointment.Appointment
+import com.dapm.appbucal360.model.doctor.Doctor
 import com.dapm.appbucal360.model.user.User
 import com.dapm.appbucal360.utils.EnumAppointmentStatus
 import com.google.firebase.firestore.ktx.firestore
@@ -14,7 +15,7 @@ class AppointmentRepository @Inject constructor() {
     val db = Firebase.firestore
 
     suspend fun registerAppointment(
-        doctor: String, date: String, patient: User, time: String
+        doctor: Doctor, date: String, patient: User, time: String
     ): Result<Appointment> {
         return try {
             val id = UUID.randomUUID()

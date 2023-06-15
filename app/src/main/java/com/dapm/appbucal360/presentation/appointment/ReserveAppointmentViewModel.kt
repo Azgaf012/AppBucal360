@@ -29,7 +29,7 @@ class ReserveAppointmentViewModel @Inject constructor(
     private val _doctorsList = MutableLiveData<List<Doctor>>()
     val doctorsList: LiveData<List<Doctor>> get() = _doctorsList
 
-    fun registerAppointment(doctor: String, date: String, patient: User, time: String) {
+    fun registerAppointment(doctor: Doctor, date: String, patient: User, time: String) {
         viewModelScope.launch {
             try {
                 val appointment = registerAppointmentUseCase(doctor, date, patient, time)
