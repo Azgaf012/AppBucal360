@@ -16,9 +16,11 @@ import com.dapm.appbucal360.R
 import com.dapm.appbucal360.model.appointment.AppointmentState
 import com.dapm.appbucal360.model.doctor.Doctor
 import com.dapm.appbucal360.presentation.common.SharedViewModel
+import com.dapm.appbucal360.utils.CalendarViewAppointmentFragment
 import com.dapm.appbucal360.utils.DisableDaysDecorator
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -26,16 +28,14 @@ import java.time.LocalTime
 import java.util.*
 
 @AndroidEntryPoint
-class ReserveAppointmentFragment : Fragment() {
+class ReserveAppointmentFragment : CalendarViewAppointmentFragment() {
 
     private val viewModel: ReserveAppointmentViewModel by viewModels()
     private val userViewModel: SharedViewModel by activityViewModels()
 
     private lateinit var doctorNameAutocomplete: AutoCompleteTextView
     private lateinit var reserveButton: FloatingActionButton
-    private lateinit var timeAutocomplete: AutoCompleteTextView
     private lateinit var selectedDate: Date
-    private lateinit var calendarView: MaterialCalendarView
     private var selectedDoctor: Doctor? = null
 
     override fun onCreateView(
@@ -59,16 +59,21 @@ class ReserveAppointmentFragment : Fragment() {
         timeAutocomplete = view.findViewById(R.id.autocomplete_horas_disponibles)
         calendarView = view.findViewById(R.id.calendarView)
 
+        val calendar = Calendar.getInstance()
+        val today = CalendarDay.from(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1, calendar.get(Calendar.DAY_OF_MONTH))
+        calendarView?.state()?.edit()
+            ?.setMinimumDate(today)
+            ?.commit()
 
     }
 
     private fun setupOnClickListeners() {
         reserveButton.setOnClickListener {
 
-            val selectedTime = timeAutocomplete.text.toString()
+            val selectedTime = timeAutocomplete?.text.toString()
             val loggedInUser = userViewModel.loggedInUser.value
 
-            if (selectedDoctor != null && selectedTime.isNotEmpty() && loggedInUser != null) {
+            if (selectedDoctor != null && selectedTime.isNotEmpty() && loggedInUser != null && ::selectedDate.isInitialized) {
 
                 AlertDialog.Builder(requireContext())
                     .setTitle("Confirmar de reserva")
@@ -97,7 +102,7 @@ class ReserveAppointmentFragment : Fragment() {
 
         }
 
-        calendarView.setOnDateChangedListener { widget, date, selected ->
+        calendarView?.setOnDateChangedListener { widget, date, selected ->
             val calendar = Calendar.getInstance()
             calendar.set(date.year, date.month - 1, date.day)
             selectedDate = calendar.time
@@ -108,7 +113,7 @@ class ReserveAppointmentFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.registerResult.observe(viewLifecycleOwner, Observer { appointmentState ->
             when (appointmentState) {
-                is AppointmentState.Success -> navigateToCitasFragment()
+                is AppointmentState.Success -> navigateToShowAppointmentFragment()
                 is AppointmentState.Error -> showErrorSnackbar(appointmentState.exception)
             }
         })
@@ -118,10 +123,10 @@ class ReserveAppointmentFragment : Fragment() {
         })
     }
 
-    private fun navigateToCitasFragment() {
+    private fun navigateToShowAppointmentFragment() {
         view?.let {
             Navigation.findNavController(it)
-                .navigate(R.id.action_reservationFragment_to_citasFragment)
+                .navigate(R.id.action_reserveAppointmentFragment_to_showAppointmentFragment)
         }
     }
 
@@ -146,50 +151,6 @@ class ReserveAppointmentFragment : Fragment() {
             // Actualizar el CalendarView y el AutoCompleteTextView para las horas disponibles
             updateCalendarView(selectedDoctor!!)
             updateTimeAutocomplete(selectedDoctor!!)
-        }
-    }
-
-    private fun updateCalendarView(doctor: Doctor) {
-
-        val workingDays = doctor.workingDays?.let { convertDayNamesToCalendarDays(it) }
-        calendarView.addDecorators(workingDays?.let { DisableDaysDecorator(it) })
-    }
-
-    private fun updateTimeAutocomplete(doctor: Doctor) {
-        val availableTimes = generateAvailableTimes(doctor!!.startTime!!, doctor!!.endTime!!)
-        val adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_dropdown_item_1line,
-            availableTimes
-        )
-        timeAutocomplete.setAdapter(adapter)
-    }
-
-    private fun generateAvailableTimes(start: String, end: String): List<String> {
-        val availableTimes = mutableListOf<String>()
-        var startTime = LocalTime.parse(start)
-        var endTime = LocalTime.parse(end)
-
-        while (startTime.isBefore(endTime) || startTime == endTime) {
-            availableTimes.add(startTime.toString())
-            startTime = startTime.plusMinutes(30)
-        }
-
-        return availableTimes
-    }
-
-    private fun convertDayNamesToCalendarDays(dayNames: List<String>): List<Int> {
-        return dayNames.map { dayName ->
-            when (dayName) {
-                "Monday" -> Calendar.MONDAY
-                "Tuesday" -> Calendar.TUESDAY
-                "Wednesday" -> Calendar.WEDNESDAY
-                "Thursday" -> Calendar.THURSDAY
-                "Friday" -> Calendar.FRIDAY
-                "Saturday" -> Calendar.SATURDAY
-                "Sunday" -> Calendar.SUNDAY
-                else -> throw IllegalArgumentException("Invalid day name: $dayName")
-            }
         }
     }
 

@@ -41,14 +41,14 @@ class MenuFragment : Fragment() {
         val listCitas = view.findViewById<ImageButton>(R.id.secondOptionHome)
 
         listCitas.setOnClickListener {
-            val action = MenuFragmentDirections.actionMenuFragmentToCitasFragment()
+            val action = MenuFragmentDirections.actionMenuFragmentToShowAppointmentFragment()
             Navigation.findNavController(view).navigate(action)
         }
 
         val regCita = view.findViewById<ImageButton>(R.id.firstOptionHome)
 
         regCita.setOnClickListener {
-            val action = MenuFragmentDirections.actionMenuFragmentToRegCitaFragment()
+            val action = MenuFragmentDirections.actionMenuFragmentToReserveAppointmentFragment()
             Navigation.findNavController(view).navigate(action)
         }
 

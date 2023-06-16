@@ -55,4 +55,13 @@ class AppointmentRepository @Inject constructor() {
             Result.failure(e)
         }
     }
+
+    suspend fun editAppointment(appointment: Appointment): Result<Appointment> {
+        return try {
+            db.collection("citas").document(appointment.id!!).set(appointment).await()
+            Result.success(appointment)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }

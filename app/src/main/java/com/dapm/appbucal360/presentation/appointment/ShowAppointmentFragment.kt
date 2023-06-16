@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.dapm.appbucal360.R
 import com.dapm.appbucal360.model.appointment.Appointment
 import com.dapm.appbucal360.presentation.common.SharedViewModel
@@ -20,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ShowAppointmentFragment : Fragment(), AppointmentAdapter.OnAppointmentListener {
 
     private val viewModel: ShowAppointmentViewModel by viewModels()
-    private val userViewModel: SharedViewModel by activityViewModels()
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private lateinit var listView: ListView
 
@@ -63,7 +64,7 @@ class ShowAppointmentFragment : Fragment(), AppointmentAdapter.OnAppointmentList
             }
         })
 
-        userViewModel.loggedInUser.observe(viewLifecycleOwner, Observer { user ->
+        sharedViewModel.loggedInUser.observe(viewLifecycleOwner, Observer { user ->
             user?.let {
                 viewModel.fetchAppointments(it.id)
             }
@@ -92,8 +93,17 @@ class ShowAppointmentFragment : Fragment(), AppointmentAdapter.OnAppointmentList
         ).show()
     }
 
+    private fun navigateToEditAppointmentFragment() {
+        view?.let {
+            Navigation.findNavController(it)
+                .navigate(R.id.action_showAppointmentFragment_to_editAppointmentFragment)
+        }
+    }
+
     override fun onEdit(appointment: Appointment) {
-        TODO("Not yet implemented")
+        sharedViewModel.appointmentSelected.value = appointment
+        navigateToEditAppointmentFragment()
+
     }
 
     override fun onDelete(appointment: Appointment) {

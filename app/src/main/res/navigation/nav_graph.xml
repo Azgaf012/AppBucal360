@@ -32,31 +32,44 @@
         tools:layout="@layout/fragment_menu">
 
         <action
-            android:id="@+id/action_menuFragment_to_citasFragment"
-            app:destination="@id/citasFragment" />
+            android:id="@+id/action_menuFragment_to_showAppointmentFragment"
+            app:destination="@id/showAppointmentFragment" />
 
         <action
-            android:id="@+id/action_menuFragment_to_regCitaFragment"
-            app:destination="@id/regCitaFragment" />
+            android:id="@+id/action_menuFragment_to_reserveAppointmentFragment"
+            app:destination="@id/reserveAppointmentFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/citasFragment"
+        android:id="@+id/showAppointmentFragment"
         android:name="com.dapm.appbucal360.presentation.appointment.ShowAppointmentFragment"
-        tools:layout="@layout/fragment_citas">
+        tools:layout="@layout/fragment_appointment_show">
         <action
-            android:id="@+id/action_citasFragment_to_menuFragment"
+            android:id="@+id/action_showAppointmentFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+
+        <action
+            android:id="@+id/action_showAppointmentFragment_to_editAppointmentFragment"
+            app:destination="@id/editAppointmentFragment" />
+
     </fragment>
 
-
     <fragment
-        android:id="@+id/regCitaFragment"
+        android:id="@+id/reserveAppointmentFragment"
         android:name="com.dapm.appbucal360.presentation.appointment.ReserveAppointmentFragment"
         tools:layout="@layout/fragment_appointment_reserve">
         <action
-            android:id="@+id/action_reservationFragment_to_citasFragment"
-            app:destination="@id/citasFragment" />
+            android:id="@+id/action_reserveAppointmentFragment_to_showAppointmentFragment"
+            app:destination="@id/showAppointmentFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/editAppointmentFragment"
+        android:name="com.dapm.appbucal360.presentation.appointment.EditAppointmentFragment"
+        tools:layout="@layout/fragment_appointment_edit">
+        <action
+            android:id="@+id/action_editAppointmentFragment_to_showAppointmentFragment"
+            app:destination="@id/showAppointmentFragment" />
+
+    </fragment>
 </navigation>
