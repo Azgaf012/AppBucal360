@@ -9,12 +9,11 @@
         android:id="@+id/doctorImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/doctor"
-        app:civ_border_width="2dp"
-        app:civ_border_color="@color/black"
         android:layout_gravity="center"
-        android:layout_marginBottom="30dp" />
-
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/doctor"
+        app:civ_border_color="@color/black"
+        app:civ_border_width="2dp" />
 
 
     <TextView
@@ -22,11 +21,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="40dp"
         android:text="Información del doctor"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="60dp" />
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/nameDoctor"
@@ -114,38 +113,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="8dp">
+        android:orientation="horizontal">
 
         <CheckBox
             android:id="@+id/fridayCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Viernes"
-            android:textSize="15sp"
-            android:textColor="@color/checkbox_text_color"
+            android:layout_marginStart="16dp"
             android:layout_weight="1"
-            android:layout_marginStart="16dp" />
+            android:text="Viernes"
+            android:textColor="@color/checkbox_text_color"
+            android:textSize="15sp" />
 
         <CheckBox
             android:id="@+id/saturdayCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sábado"
-            android:textSize="15sp"
-            android:textColor="@color/checkbox_text_color"
+            android:layout_marginStart="16dp"
             android:layout_weight="1"
-            android:layout_marginStart="16dp" />
+            android:text="Sábado"
+            android:textColor="@color/checkbox_text_color"
+            android:textSize="15sp" />
 
         <CheckBox
             android:id="@+id/sundayCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Domingo"
-            android:textSize="15sp"
-            android:textColor="@color/checkbox_text_color"
+            android:layout_marginStart="16dp"
             android:layout_weight="1"
-            android:layout_marginStart="16dp" />
+            android:text="Domingo"
+            android:textColor="@color/checkbox_text_color"
+            android:textSize="15sp" />
 
     </LinearLayout>
 
@@ -153,9 +151,16 @@
         android:id="@+id/enabledCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         android:text="Habilitado"
-        android:textSize="15sp"
         android:textColor="@color/checkbox_text_color"
-        android:layout_marginTop="16dp" />
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/btn_registrar_doctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Registrar" />
 
 </LinearLayout>
