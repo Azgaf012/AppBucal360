@@ -1,6 +1,5 @@
 package com.dapm.appbucal360.presentation.menu
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -36,13 +35,19 @@ class MenuAdminFragment : Fragment() {
         val nombreUsuario: TextView = view.findViewById(R.id.nombreUsuario)
         nombreUsuario.text = "Hola, ${userViewModel.loggedInUser.value?.firstName}"
 
-        val regDoctor = view.findViewById<ImageButton>(R.id.firstOptionHome)
+        val regDoctor = view.findViewById<ImageButton>(R.id.registerDoctor)
 
         regDoctor.setOnClickListener {
             val action = MenuAdminFragmentDirections.actionMenuAdminFragmentToRegisterDoctorFragment()
             Navigation.findNavController(view).navigate(action)
         }
 
+        val listDoctors = view.findViewById<ImageButton>(R.id.listDoctors)
+
+        listDoctors.setOnClickListener {
+            val action = MenuAdminFragmentDirections.actionMenuAdminFragmentToAdminDoctorsFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
     }
 
 }

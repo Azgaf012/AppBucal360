@@ -40,6 +40,10 @@ android {
         compose = true
     }
 
+    viewBinding {
+        enabled = true
+    }
+
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.2"
         kotlinCompilerVersion '1.8.10'

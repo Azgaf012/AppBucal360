@@ -1,16 +1,11 @@
 package com.dapm.appbucal360.data
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.dapm.appbucal360.model.doctor.Doctor
-import com.dapm.appbucal360.model.user.User
 import com.dapm.appbucal360.utils.EnumDoctorStatus
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
-import java.util.UUID
+import java.util.*
 import javax.inject.Inject
 
 class DoctorRepository @Inject constructor() {
@@ -37,5 +32,18 @@ class DoctorRepository @Inject constructor() {
         }
 
         return doctors
+    }
+
+    suspend fun registerDoctor(
+        name: String, lastName: String, startTime: String, endTime: String, workingDays: List<String>
+    ): Result<Doctor> {
+        return try {
+            val id = UUID.randomUUID()
+            val doctor = Doctor(id.toString(), name, lastName, workingDays, startTime, endTime)
+            db.collection("doctor").document(id.toString()).set(doctor).await()
+            Result.success(doctor)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 }

@@ -97,7 +97,7 @@
                                 android:orientation="vertical">
 
                                 <ImageButton
-                                    android:id="@+id/firstOptionHome"
+                                    android:id="@+id/registerDoctor"
                                     android:layout_width="48dp"
                                     android:layout_height="48dp"
                                     android:layout_gravity="center"
@@ -125,7 +125,7 @@
                                 android:orientation="vertical">
 
                                 <ImageButton
-                                    android:id="@+id/secondOptionHome"
+                                    android:id="@+id/listDoctors"
                                     android:layout_width="48dp"
                                     android:layout_height="48dp"
                                     android:layout_gravity="center"

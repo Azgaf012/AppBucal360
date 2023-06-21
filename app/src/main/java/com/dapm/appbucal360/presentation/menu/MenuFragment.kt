@@ -1,6 +1,5 @@
 package com.dapm.appbucal360.presentation.menu
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.navArgs
 import com.dapm.appbucal360.R
 import com.dapm.appbucal360.presentation.common.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,14 +37,14 @@ class MenuFragment : Fragment() {
         val nombreUsuario: TextView = view.findViewById(R.id.nombreUsuario)
         nombreUsuario.text = "Hola, ${userViewModel.loggedInUser.value?.firstName}"
 
-        val listCitas = view.findViewById<ImageButton>(R.id.secondOptionHome)
+        val listCitas = view.findViewById<ImageButton>(R.id.listDoctors)
 
         listCitas.setOnClickListener {
             val action = MenuFragmentDirections.actionMenuFragmentToShowAppointmentFragment()
             Navigation.findNavController(view).navigate(action)
         }
 
-        val regCita = view.findViewById<ImageButton>(R.id.firstOptionHome)
+        val regCita = view.findViewById<ImageButton>(R.id.registerDoctor)
 
         regCita.setOnClickListener {
             val action = MenuFragmentDirections.actionMenuFragmentToReserveAppointmentFragment()
