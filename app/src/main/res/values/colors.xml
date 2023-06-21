@@ -14,4 +14,11 @@
     <color name="secondary_dark">#c63f17</color> <!--Darker Peach-->
     <color name="secondary_light">#ffa270</color> <!--Lighter Peach-->
     <color name="background">#fafafa</color>
+    <color name="text_color">#333333</color>
+    <color name="purple_light">#D2BFF4</color>
+    <color name="purple_dark">#3D0B93</color>
+
+    <color name="hint_color">#999999</color>
+    <color name="checkbox_text_color">#333333</color>
+    <color name="black">#000000</color>
 </resources>

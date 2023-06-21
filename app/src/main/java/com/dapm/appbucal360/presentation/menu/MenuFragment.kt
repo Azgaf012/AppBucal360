@@ -1,5 +1,6 @@
 package com.dapm.appbucal360.presentation.menu
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -51,6 +52,8 @@ class MenuFragment : Fragment() {
             val action = MenuFragmentDirections.actionMenuFragmentToReserveAppointmentFragment()
             Navigation.findNavController(view).navigate(action)
         }
+
+        //Barra inferior funcionamiento
 
         viewModel = ViewModelProvider(this).get(MenuViewModel::class.java)
         // TODO: Use the ViewModel

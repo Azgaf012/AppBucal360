@@ -26,4 +26,11 @@
 
     <string name="date_picker_year">Año</string>
     <string name="date_picker_month">Mes</string>
+
+    <string name="guide_button1">Puede registrar una cita utilizando este botón</string>
+    <string name="guide_button2">Puede ver sus citas utilizando este botón</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 </resources>
