@@ -6,9 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.TextView
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.Navigation
 import com.dapm.appbucal360.R
+import com.dapm.appbucal360.presentation.common.SharedViewModel
 
 class MenuAdminFragment : Fragment() {
+
+    private val userViewModel: SharedViewModel by activityViewModels()
 
     companion object {
         fun newInstance() = MenuAdminFragment()
@@ -23,10 +30,19 @@ class MenuAdminFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_menu_admin, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MenuAdminViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val nombreUsuario: TextView = view.findViewById(R.id.nombreUsuario)
+        nombreUsuario.text = "Hola, ${userViewModel.loggedInUser.value?.firstName}"
+
+        val regDoctor = view.findViewById<ImageButton>(R.id.firstOptionHome)
+
+        regDoctor.setOnClickListener {
+            val action = MenuAdminFragmentDirections.actionMenuAdminFragmentToRegisterDoctorFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
+
     }
 
 }

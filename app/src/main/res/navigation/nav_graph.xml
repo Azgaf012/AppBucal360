@@ -49,12 +49,12 @@
         tools:layout="@layout/fragment_menu_admin">
 
         <action
-            android:id="@+id/action_menuFragment_to_showAppointmentFragment"
-            app:destination="@id/showAppointmentFragment" />
+            android:id="@+id/action_menuAdminFragment_to_adminDoctorsFragment"
+            app:destination="@id/adminDoctorsFragment" />
 
         <action
-            android:id="@+id/action_menuFragment_to_reserveAppointmentFragment"
-            app:destination="@id/reserveAppointmentFragment" />
+            android:id="@+id/action_menuAdminFragment_to_registerDoctorFragment"
+            app:destination="@id/registerDoctorFragment" />
     </fragment>
 
     <fragment
@@ -89,4 +89,24 @@
             app:destination="@id/showAppointmentFragment" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/registerDoctorFragment"
+        android:name="com.dapm.appbucal360.presentation.admin.RegisterDoctorFragment"
+        tools:layout="@layout/fragment_register_doctor">
+        <action
+            android:id="@+id/action_registerDoctorFragment_to_adminDoctorsFragment"
+            app:destination="@id/adminDoctorsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/adminDoctorsFragment"
+        android:name="com.dapm.appbucal360.presentation.admin.ListDoctorsFragment"
+        tools:layout="@layout/fragment_list_doctors">
+        <action
+            android:id="@+id/action_adminDoctorsFragment_to_menuAdminFragment"
+            app:destination="@id/menuAdminFragment" />
+
+    </fragment>
+
 </navigation>
