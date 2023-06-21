@@ -8,5 +8,6 @@ data class User (
     val lastName: String = "",
     val phoneNumber: String = "",
     val email: String = "",
-    val birthDate: Date = Date()
+    val birthDate: Date = Date(),
+    val role: String = ""
         )

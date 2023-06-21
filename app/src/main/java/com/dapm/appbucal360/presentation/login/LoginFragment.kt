@@ -17,6 +17,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.dapm.appbucal360.R
 import com.dapm.appbucal360.presentation.common.SharedViewModel
+import com.dapm.appbucal360.utils.EnumRole
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -86,7 +87,14 @@ class LoginFragment : Fragment() {
             if (navController.currentDestination?.id == R.id.loginFragment) {
                 Snackbar.make(view, "Bienvenido, ${loggedInUser.firstName}", Snackbar.LENGTH_LONG).show()
                 sharedViewModel.loggedInUser.value = loggedInUser
-                val action = LoginFragmentDirections.actionLoginFragmentToMenuFragment()
+
+                var action = LoginFragmentDirections.actionLoginFragmentToMenuFragment()
+
+
+                if(loggedInUser.role.equals(EnumRole.ADMIN.toString())){
+                    action = LoginFragmentDirections.actionLoginFragmentToMenuAdminFragment()
+                }
+
                 navController.navigate(action)
             }
         })

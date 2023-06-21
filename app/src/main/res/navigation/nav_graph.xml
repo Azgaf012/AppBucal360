@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_loginFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_menuAdminFragment"
+            app:destination="@id/menuAdminFragment" />
     </fragment>
 
     <fragment
@@ -30,6 +33,20 @@
         android:id="@+id/menuFragment"
         android:name="com.dapm.appbucal360.presentation.menu.MenuFragment"
         tools:layout="@layout/fragment_menu">
+
+        <action
+            android:id="@+id/action_menuFragment_to_showAppointmentFragment"
+            app:destination="@id/showAppointmentFragment" />
+
+        <action
+            android:id="@+id/action_menuFragment_to_reserveAppointmentFragment"
+            app:destination="@id/reserveAppointmentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/menuAdminFragment"
+        android:name="com.dapm.appbucal360.presentation.menu.MenuAdminFragment"
+        tools:layout="@layout/fragment_menu_admin">
 
         <action
             android:id="@+id/action_menuFragment_to_showAppointmentFragment"
