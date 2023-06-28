@@ -9,10 +9,11 @@ data class Doctor(
     val lastName: String? = null,
     val workingDays: List<String> = emptyList(),
     val startTime: String? = null,
-    val endTime: String? = null
+    val endTime: String? = null,
+    val status: String? = null
 ){
 
-    constructor() : this(null,null,null,emptyList(),null,null)
+    constructor() : this(null,null,null,emptyList(),null,null, null)
     override fun toString(): String {
         return "$name $lastName"
     }

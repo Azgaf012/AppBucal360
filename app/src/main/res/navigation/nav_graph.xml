@@ -93,7 +93,7 @@
     <fragment
         android:id="@+id/registerDoctorFragment"
         android:name="com.dapm.appbucal360.presentation.admin.RegisterDoctorFragment"
-        tools:layout="@layout/fragment_register_doctor">
+        tools:layout="@layout/fragment_doctor_register">
         <action
             android:id="@+id/action_registerDoctorFragment_to_adminDoctorsFragment"
             app:destination="@id/adminDoctorsFragment" />
@@ -102,10 +102,24 @@
     <fragment
         android:id="@+id/adminDoctorsFragment"
         android:name="com.dapm.appbucal360.presentation.admin.ListDoctorsFragment"
-        tools:layout="@layout/fragment_list_doctors">
+        tools:layout="@layout/fragment_doctors_list">
         <action
             android:id="@+id/action_adminDoctorsFragment_to_menuAdminFragment"
             app:destination="@id/menuAdminFragment" />
+
+        <action
+                android:id="@+id/action_adminDoctorsFragment_to_editDoctorFragment"
+                app:destination="@id/editDoctorFragment" />
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/editDoctorFragment"
+            android:name="com.dapm.appbucal360.presentation.admin.EditDoctorFragment"
+            tools:layout="@layout/fragment_doctor_edit">
+        <action
+                android:id="@+id/action_editDoctorFragment_to_adminDoctorsFragment"
+                app:destination="@id/adminDoctorsFragment" />
 
     </fragment>
 

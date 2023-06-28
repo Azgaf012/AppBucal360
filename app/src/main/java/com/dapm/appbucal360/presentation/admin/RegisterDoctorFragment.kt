@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.dapm.appbucal360.R
-import com.dapm.appbucal360.databinding.FragmentRegisterDoctorBinding
+import com.dapm.appbucal360.databinding.FragmentDoctorRegisterBinding
 import com.dapm.appbucal360.model.doctor.DoctorState
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +21,7 @@ class RegisterDoctorFragment : Fragment() {
         fun newInstance() = RegisterDoctorFragment()
     }
 
-    private var _binding: FragmentRegisterDoctorBinding? = null
+    private var _binding: FragmentDoctorRegisterBinding? = null
     private val binding get() = _binding!!
     private val viewModel: RegisterDoctorViewModel by viewModels()
 
@@ -29,7 +29,7 @@ class RegisterDoctorFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentRegisterDoctorBinding.inflate(inflater, container, false)
+        _binding = FragmentDoctorRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
 
