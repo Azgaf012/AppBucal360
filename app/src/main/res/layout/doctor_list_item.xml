@@ -28,15 +28,39 @@
             android:layout_below="@id/doctor_name"
             android:textSize="16sp" />
 
-        <ImageButton
-            android:id="@+id/editar_doctor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:background="?android:attr/selectableItemBackground"
-            android:src="@drawable/ic_pencil"
-            app:tint="@color/edit_icon" />
+        <LinearLayout
+                android:id="@+id/status_buttons_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:orientation="horizontal">
 
+            <ImageButton
+                    android:id="@+id/desactivar_doctor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_person_off"
+                    app:tint="@color/delete_icon" />
+
+            <ImageButton
+                    android:id="@+id/activar_doctor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/ic_person_add"
+                    app:tint="@color/primary" />
+
+        </LinearLayout>
+
+        <ImageButton
+                android:id="@+id/editar_doctor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/status_buttons_container"
+                android:background="?android:attr/selectableItemBackground"
+                android:src="@drawable/ic_pencil"
+                app:tint="@color/edit_icon" />
 
     </RelativeLayout>
 

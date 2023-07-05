@@ -1,5 +1,6 @@
 package com.dapm.appbucal360.presentation.admin
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,42 +12,71 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.dapm.appbucal360.R
+import com.dapm.appbucal360.databinding.FragmentDoctorEditBinding
+import com.dapm.appbucal360.databinding.FragmentDoctorsListBinding
 import com.dapm.appbucal360.model.appointment.Appointment
 import com.dapm.appbucal360.model.doctor.Doctor
 import com.dapm.appbucal360.presentation.common.SharedViewModel
+import com.dapm.appbucal360.utils.showErrorSnackbar
+import com.dapm.appbucal360.utils.showSuccessSnackbar
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ListDoctorsFragment : Fragment(), DoctorAdapter.OnDoctorLister {
 
+    private var _binding: FragmentDoctorsListBinding? = null
+    private val binding get() = _binding!!
+
     private val viewModel: ListDoctorsViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
-
-    private lateinit var listView: ListView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_doctors_list, container, false)
+        _binding = FragmentDoctorsListBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        listView = view.findViewById(R.id.listview_doctores)
         observeViewModel()
+        setUpdateButtonClickListener()
         viewModel.fetchDoctors()
     }
 
     private fun observeViewModel() {
         viewModel.doctorsList.observe(viewLifecycleOwner, Observer { doctors ->
-            doctors?.let { updateListView(it) }
+            doctors?.let { updateListView(it as MutableList<Doctor>) }
+        })
+
+        viewModel.updatedDoctor.observe(viewLifecycleOwner, Observer { updatedDoctor ->
+            if (updatedDoctor.isSuccess) {
+                requireView().showErrorSnackbar("Doctor habilitado con exito")
+
+            } else {
+                requireView().showSuccessSnackbar("Error al habilitar al doctor")
+            }
         })
     }
 
-    private fun updateListView(doctors: List<Doctor>) {
+    private fun setUpdateButtonClickListener() {
+
+
+        binding.backButton.setOnClickListener {
+            navigateToMenuAdminFragment()
+        }
+
+        binding.addDoctor.setOnClickListener {
+            navigateToRegisterDoctorFragment()
+        }
+
+    }
+
+    private fun updateListView(doctors: MutableList<Doctor>) {
         val doctorsAdapter = DoctorAdapter(requireContext(), doctors, this)
-        listView.adapter = doctorsAdapter
+        binding.listviewDoctores.adapter = doctorsAdapter
     }
 
     override fun onEdit(doctor: Doctor) {
@@ -54,11 +84,50 @@ class ListDoctorsFragment : Fragment(), DoctorAdapter.OnDoctorLister {
         navigateToEditDoctorFragment()
     }
 
+    override fun onDisabled(doctor: Doctor) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onEnabled(doctor: Doctor) {
+        showConfirmationDialog(doctor)
+    }
+
     private fun navigateToEditDoctorFragment() {
         view?.let {
             Navigation.findNavController(it)
                 .navigate(R.id.action_adminDoctorsFragment_to_editDoctorFragment)
         }
+    }
+
+    private fun navigateToMenuAdminFragment() {
+        view?.let {
+            Navigation.findNavController(it)
+                .navigate(R.id.action_adminDoctorsFragment_to_menuAdminFragment)
+        }
+    }
+
+    private fun navigateToRegisterDoctorFragment() {
+        view?.let {
+            Navigation.findNavController(it)
+                .navigate(R.id.action_adminDoctorsFragment_to_registerDoctorFragment)
+        }
+    }
+
+    private fun showConfirmationDialog(doctor: Doctor) {
+        val builder = AlertDialog.Builder(context)
+        builder.apply {
+            setMessage("Esta seguro que desea habilitar al Dr. ${doctor.name}?")
+            setPositiveButton("Si") { dialog, _ ->
+                doctor.id?.let { viewModel.enableDoctor(it) }
+                (binding.listviewDoctores.adapter as DoctorAdapter).updateDoctor(doctor)
+            }
+            setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+        }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 
 }

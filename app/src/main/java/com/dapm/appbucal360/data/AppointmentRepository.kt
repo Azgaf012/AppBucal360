@@ -4,6 +4,7 @@ import com.dapm.appbucal360.model.appointment.Appointment
 import com.dapm.appbucal360.model.doctor.Doctor
 import com.dapm.appbucal360.model.user.User
 import com.dapm.appbucal360.utils.EnumAppointmentStatus
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
@@ -63,5 +64,33 @@ class AppointmentRepository @Inject constructor() {
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+
+    suspend fun getUpcomingAppointmentsByDoctor(doctorId: String): Result<List<Appointment>> {
+
+        val currentTimestamp = Timestamp.now().toDate()
+        val currentTimeFormat = SimpleDateFormat("HH:mm").format(Date())
+
+        val currentTime = SimpleDateFormat("HH:mm").parse(currentTimeFormat)
+
+
+        val querySnapshot = db.collection("appointments")
+            .whereEqualTo("doctor.id", doctorId)
+            .whereGreaterThan("date", currentTimestamp)
+            .get()
+            .await()
+
+        val appointments = mutableListOf<Appointment>()
+
+        for (document in querySnapshot) {
+            val appointment = document.toObject(Appointment::class.java)
+
+            val appointmentTime = SimpleDateFormat("HH:mm").parse(appointment.time)
+            if(appointmentTime.after(currentTime)){
+                appointments.add(appointment)
+            }
+        }
+
+        return Result.success(appointments)
     }
 }

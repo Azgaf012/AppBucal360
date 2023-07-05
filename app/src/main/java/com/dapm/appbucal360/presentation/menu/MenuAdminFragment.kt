@@ -35,13 +35,6 @@ class MenuAdminFragment : Fragment() {
         val nombreUsuario: TextView = view.findViewById(R.id.nombreUsuario)
         nombreUsuario.text = "Hola, ${userViewModel.loggedInUser.value?.firstName}"
 
-        val regDoctor = view.findViewById<ImageButton>(R.id.registerDoctor)
-
-        regDoctor.setOnClickListener {
-            val action = MenuAdminFragmentDirections.actionMenuAdminFragmentToRegisterDoctorFragment()
-            Navigation.findNavController(view).navigate(action)
-        }
-
         val listDoctors = view.findViewById<ImageButton>(R.id.listDoctors)
 
         listDoctors.setOnClickListener {

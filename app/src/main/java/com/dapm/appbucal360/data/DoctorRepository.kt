@@ -2,6 +2,7 @@ package com.dapm.appbucal360.data
 
 import com.dapm.appbucal360.model.doctor.Doctor
 import com.dapm.appbucal360.utils.EnumDoctorStatus
+import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
@@ -13,7 +14,7 @@ class DoctorRepository @Inject constructor() {
 
     suspend fun getDoctorsActived(): List<Doctor> {
         val querySnapshot = db.collection("doctor")
-            .whereEqualTo("status", EnumDoctorStatus.ACTIVED)
+            .whereEqualTo("state", EnumDoctorStatus.ACTIVED)
             .get()
             .await()
 
@@ -48,9 +49,9 @@ class DoctorRepository @Inject constructor() {
             val workingDays = document.get("workingDays") as? List<String> ?: listOf()
             val startTime = document.getString("startTime")
             val endTime = document.getString("endTime")
-            val status = document.getString("status")
+            val state = document.getString("state")
 
-            val doctor = Doctor(id, name, lastName, workingDays, startTime, endTime, status)
+            val doctor = Doctor(id, name, lastName, workingDays, startTime, endTime, state)
             doctors.add(doctor)
         }
 
@@ -77,6 +78,33 @@ class DoctorRepository @Inject constructor() {
             Result.success(doctor)
         } catch (e: Exception){
             Result.failure(e)
+        }
+    }
+
+    suspend fun enableDoctor(id: String): Result<Doctor>{
+        return try {
+            // Obtain the doctor document from Firestore.
+            val docRef = db.collection("doctor").document(id)
+            val snapshot = docRef.get().await()
+
+            // Convert the snapshot to a Doctor object.
+            val doctor = snapshot.toObject(Doctor::class.java)
+
+            // Check if the doctor exists.
+            if (doctor == null) {
+                return Result.failure(Exception("No doctor found with id: $id"))
+            }
+
+            // Update the doctor's state.
+            doctor.state = EnumDoctorStatus.ACTIVED.toString()
+            docRef.set(doctor).await()
+
+            // Return the updated doctor.
+            Result.success(doctor)
+        } catch (e: FirebaseFirestoreException) {
+            Result.failure(Exception("Failed to enable doctor $id due to a Firestore error.", e))
+        } catch (e: Exception) {
+            Result.failure(Exception("Failed to enable doctor $id due to an unexpected error.", e))
         }
     }
 }

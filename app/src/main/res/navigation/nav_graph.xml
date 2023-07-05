@@ -52,9 +52,7 @@
             android:id="@+id/action_menuAdminFragment_to_adminDoctorsFragment"
             app:destination="@id/adminDoctorsFragment" />
 
-        <action
-            android:id="@+id/action_menuAdminFragment_to_registerDoctorFragment"
-            app:destination="@id/registerDoctorFragment" />
+
     </fragment>
 
     <fragment
@@ -110,6 +108,10 @@
         <action
                 android:id="@+id/action_adminDoctorsFragment_to_editDoctorFragment"
                 app:destination="@id/editDoctorFragment" />
+
+        <action
+                android:id="@+id/action_adminDoctorsFragment_to_registerDoctorFragment"
+                app:destination="@id/registerDoctorFragment" />
 
     </fragment>
 
