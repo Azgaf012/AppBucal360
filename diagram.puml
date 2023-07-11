@@ -1,0 +1,8 @@
+@startuml
+class MyClass {
+    + field1: String
+    - field2: Int
+    + method1(): Unit
+    - method2(): Boolean
+}
+@enduml
