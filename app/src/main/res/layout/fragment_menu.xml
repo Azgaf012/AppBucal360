@@ -238,6 +238,210 @@
         </LinearLayout>
         <!-- onBoarding Screen 1 END -->
 
+        <!-- onBoarding Screen 2 START-->
+        <LinearLayout
+                android:id="@+id/onboarding_2"
+                android:layout_width="400dp"
+                android:layout_height="600dp"
+                android:layout_gravity="center"
+                android:background="@drawable/obboarding_layout"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:visibility="gone">
+
+            <TextView
+                    android:id="@+id/Appointment_reserve_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="Reservar Cita"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            <TextView
+                    android:id="@+id/description_screen_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="En esra vista podrás elegir tu odontólogo, la fecha de tu cita y el horario de tu cita. "
+                    android:textSize="16sp" />
+
+            <ImageView
+                    android:id="@+id/img_screen_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="380dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/screen_2r" />
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                <Button
+                        android:id="@+id/btn_prv_screen_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:text="Prev"
+                        app:icon="@drawable/mcv_action_previous"
+                        app:iconGravity="textStart" />
+
+                <Button
+                        android:id="@+id/btn_nxt_screen_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="Next"
+                        app:icon="@drawable/mcv_action_next"
+                        app:iconGravity="textEnd" />
+            </LinearLayout>
+        </LinearLayout>
+        <!-- onBoarding Screen 2 END -->
+
+        <!-- onBoarding Screen 3 START-->
+        <LinearLayout
+                android:id="@+id/onboarding_3"
+                android:layout_width="400dp"
+                android:layout_height="600dp"
+                android:layout_gravity="center"
+                android:background="@drawable/obboarding_layout"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:visibility="gone">
+
+            <TextView
+                    android:id="@+id/Appointment_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="Reprogramar Cita"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            <TextView
+                    android:id="@+id/description_screen_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="En esta vista podrás re-elegir tu odontólogo, la fecha de tu cita y el horario de tu cita. "
+                    android:textSize="16sp" />
+
+            <ImageView
+                    android:id="@+id/img_screen_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="380dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/screen_3r" />
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                <Button
+                        android:id="@+id/btn_prv_screen_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:text="Prev"
+                        app:icon="@drawable/mcv_action_previous"
+                        app:iconGravity="textStart" />
+
+                <Button
+                        android:id="@+id/btn_nxt_screen_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="Next"
+                        app:icon="@drawable/mcv_action_next"
+                        app:iconGravity="textEnd" />
+            </LinearLayout>
+        </LinearLayout>
+        <!-- onBoarding Screen 3 END -->
+
+        <!-- onBoarding Screen 4 START-->
+        <LinearLayout
+                android:id="@+id/onboarding_4"
+                android:layout_width="400dp"
+                android:layout_height="600dp"
+                android:layout_gravity="center"
+                android:background="@drawable/obboarding_layout"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:visibility="gone">
+
+            <TextView
+                    android:id="@+id/Appointment_showandcancel_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:text="Ver y Cancelar Citas"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            <TextView
+                    android:id="@+id/description_screen_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:justificationMode="inter_word"
+                    android:text="En esta  vista podrás ver todas las vistas que tienes registradas y también podrás cancelar una cita si así lo deseas."
+                    android:textSize="16sp" />
+
+            <ImageView
+                    android:id="@+id/img_screen_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="380dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/screen_4r" />
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                <Button
+                        android:id="@+id/btn_prv_screen_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
+                        android:text="Prev"
+                        app:icon="@drawable/mcv_action_previous"
+                        app:iconGravity="textStart" />
+
+                <Button
+                        android:id="@+id/btn_nxt_screen_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:text="Finish"
+                        app:icon="@drawable/mcv_action_next"
+                        app:iconGravity="textEnd" />
+            </LinearLayout>
+        </LinearLayout>
+        <!-- onBoarding Screen 4 END -->
+
     </FrameLayout>
 
 
