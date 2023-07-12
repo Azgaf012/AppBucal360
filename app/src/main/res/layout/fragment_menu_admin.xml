@@ -20,7 +20,7 @@
             <LinearLayout
                 android:id="@+id/layout1"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="85dp"
                 android:background="@drawable/rounded_layout"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -42,11 +42,12 @@
                             android:id="@+id/nombreUsuario"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="22dp"
+                            android:layout_marginTop="25dp"
                             android:text="Hola sor"
                             android:textColor="#FFFFFF"
-                            android:textSize="18sp" />
+                            android:textSize="22sp"
+                                android:textStyle="bold"    />
 
                     </LinearLayout>
 
@@ -102,7 +103,7 @@
                                     android:text="Registrar Doctor"
                                     android:textColor="#000000"
                                     android:layout_marginTop="5dp"
-                                    android:textSize="14sp"
+                                    android:textSize="15sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
 
@@ -129,7 +130,7 @@
                                     android:layout_marginTop="5dp"
                                     android:text="Administrar Doctores"
                                     android:textColor="#000000"
-                                    android:textSize="14sp"
+                                    android:textSize="15sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
 
@@ -166,7 +167,7 @@
                                     android:text="Administrar Citas"
                                     android:textColor="#000000"
                                     android:layout_marginTop="5dp"
-                                    android:textSize="14sp"
+                                    android:textSize="15sp"
                                     android:textStyle="bold" />
                             </LinearLayout>
 

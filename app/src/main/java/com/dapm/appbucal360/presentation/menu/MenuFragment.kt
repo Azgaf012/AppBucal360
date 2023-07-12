@@ -1,6 +1,7 @@
 package com.dapm.appbucal360.presentation.menu
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.navigation.Navigation
 import com.dapm.appbucal360.R
 import com.dapm.appbucal360.presentation.common.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 
 @AndroidEntryPoint
 class MenuFragment : Fragment() {
@@ -30,9 +32,21 @@ class MenuFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_menu, container, false)
     }
 
-    @Deprecated("Deprecated in Java")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val archivoLogin = File(requireContext().filesDir, "login_1")
+
+        if (!archivoLogin.exists()) {
+            archivoLogin.createNewFile()
+            val onboardingLayout = view.findViewById<View>(R.id.onboarding_background)
+            onboardingLayout.visibility = View.VISIBLE
+            Log.d("No Existía","Existía")
+        } else {
+            val onboardingLayout = view.findViewById<View>(R.id.onboarding_background)
+            onboardingLayout.visibility = View.GONE
+            Log.d("Sí Existe","Existe")
+        }
 
         val nombreUsuario: TextView = view.findViewById(R.id.nombreUsuario)
         nombreUsuario.text = "Hola, ${userViewModel.loggedInUser.value?.firstName}"
