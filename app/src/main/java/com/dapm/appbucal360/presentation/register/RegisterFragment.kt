@@ -14,8 +14,10 @@ import androidx.navigation.Navigation
 import com.dapm.appbucal360.R
 import com.dapm.appbucal360.model.user.RegistrationState
 import com.google.android.material.snackbar.Snackbar
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Locale
+import java.util.regex.Pattern
 
 class RegisterFragment : Fragment() {
 
@@ -45,26 +47,42 @@ class RegisterFragment : Fragment() {
             val firstName = firstNameEditText.text.toString()
             val lastName = lastNameEditText.text.toString()
             val phoneNumber = phoneNumberEditText.text.toString()
+            val birthDateStr = birthDateEditText.text.toString()
+
+            if (!isValidEmail(email)) {
+                Snackbar.make(view, "Email inválido", Snackbar.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
             val birthDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-            val birthDate = birthDateFormat.parse(birthDateEditText.text.toString())
+            val birthDate = try {
+                birthDateFormat.parse(birthDateStr)
+            } catch (e: ParseException) {
+                Snackbar.make(view, "Fecha de nacimiento inválida", Snackbar.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
             viewModel.register(email, password, firstName, lastName, phoneNumber, birthDate)
         }
 
-        // Observar el LiveData registrationState
         viewModel.registrationState.observe(viewLifecycleOwner, Observer { registrationState ->
             when (registrationState) {
                 is RegistrationState.Success -> {
-                    // Manejar caso de éxito
                     Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_loginFragment)
                 }
                 is RegistrationState.Error -> {
-                    // Manejar caso de error
                     Snackbar.make(view, registrationState.exception?.localizedMessage ?: "Error al registrar", Snackbar.LENGTH_LONG).show()
                 }
             }
         })
+    }
+
+    private fun isValidEmail(email: String): Boolean {
+        val emailPattern = ("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+        val pattern = Pattern.compile(emailPattern)
+        val matcher = pattern.matcher(email)
+        return matcher.matches()
     }
 
 }

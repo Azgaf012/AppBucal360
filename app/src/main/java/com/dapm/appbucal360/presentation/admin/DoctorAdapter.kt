@@ -6,19 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageButton
 import android.widget.TextView
 import com.dapm.appbucal360.R
 import com.dapm.appbucal360.model.doctor.Doctor
 import com.dapm.appbucal360.utils.EnumDoctorStatus
+import java.util.Locale
 
 class DoctorAdapter(
     context: Context,
     private val doctors: MutableList<Doctor>,
     private val listener: OnDoctorLister
-    ) : ArrayAdapter<Doctor>(context, R.layout.doctor_list_item, doctors) {
+    ) : ArrayAdapter<Doctor>(context, R.layout.doctor_list_item, doctors),Filterable {
 
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+    private val allDoctors = ArrayList(doctors)
 
     interface OnDoctorLister{
         fun onEdit(doctor: Doctor)
@@ -95,4 +100,36 @@ class DoctorAdapter(
             notifyDataSetChanged()
         }
     }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val filteredList: MutableList<Doctor> = ArrayList()
+
+                if (constraint == null || constraint.isEmpty()) {
+                    filteredList.addAll(allDoctors)
+                } else {
+                    val filterPattern = constraint.toString().lowercase(Locale.getDefault()).trim { it <= ' ' }
+
+                    for (doctor in allDoctors) {
+                        if (doctor.name?.lowercase(Locale.getDefault())?.contains(filterPattern) == true) {
+                            filteredList.add(doctor)
+                        }
+                    }
+                }
+
+                val results = FilterResults()
+                results.values = filteredList
+                return results
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                clear()
+                addAll(results?.values as List<Doctor>)
+                notifyDataSetChanged()
+            }
+        }
+    }
+
 }

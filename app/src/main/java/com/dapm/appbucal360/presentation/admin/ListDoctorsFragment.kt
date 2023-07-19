@@ -2,24 +2,22 @@ package com.dapm.appbucal360.presentation.admin
 
 import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.dapm.appbucal360.R
-import com.dapm.appbucal360.databinding.FragmentDoctorEditBinding
 import com.dapm.appbucal360.databinding.FragmentDoctorsListBinding
-import com.dapm.appbucal360.model.appointment.Appointment
 import com.dapm.appbucal360.model.doctor.Doctor
 import com.dapm.appbucal360.presentation.common.SharedViewModel
 import com.dapm.appbucal360.utils.showErrorSnackbar
 import com.dapm.appbucal360.utils.showSuccessSnackbar
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -71,6 +69,16 @@ class ListDoctorsFragment : Fragment(), DoctorAdapter.OnDoctorLister {
         binding.addDoctor.setOnClickListener {
             navigateToRegisterDoctorFragment()
         }
+
+        binding.searchDoctor.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                (binding.listviewDoctores.adapter as DoctorAdapter).filter.filter(s)
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
 
     }
 

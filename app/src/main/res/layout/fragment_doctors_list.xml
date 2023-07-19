@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_search"
             android:drawablePadding="10dp"
-            android:hint="Search doctor..."
+            android:hint="Buscar doctor..."
             android:padding="10dp" />
 
     <ListView

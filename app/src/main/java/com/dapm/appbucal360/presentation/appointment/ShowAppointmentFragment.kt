@@ -2,6 +2,8 @@ package com.dapm.appbucal360.presentation.appointment
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +14,19 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.dapm.appbucal360.R
+import com.dapm.appbucal360.databinding.FragmentAppointmentShowBinding
+import com.dapm.appbucal360.databinding.FragmentDoctorsListBinding
 import com.dapm.appbucal360.model.appointment.Appointment
+import com.dapm.appbucal360.presentation.admin.DoctorAdapter
 import com.dapm.appbucal360.presentation.common.SharedViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ShowAppointmentFragment : Fragment(), AppointmentAdapter.OnAppointmentListener {
+
+    private var _binding: FragmentAppointmentShowBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: ShowAppointmentViewModel by viewModels()
     private val sharedViewModel: SharedViewModel by activityViewModels()
@@ -29,7 +37,8 @@ class ShowAppointmentFragment : Fragment(), AppointmentAdapter.OnAppointmentList
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_appointment_show, container, false)
+        _binding = FragmentAppointmentShowBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,7 +53,23 @@ class ShowAppointmentFragment : Fragment(), AppointmentAdapter.OnAppointmentList
     }
 
     private fun setupOnClickListeners() {
-        // Aquí puedes configurar los listeners para los botones de editar y eliminar
+        binding.backButton.setOnClickListener {
+            navigateToMenuFragment()
+        }
+
+        binding.fabAddAppointment.setOnClickListener {
+            navigateToReserveAppointmentFragment()
+        }
+
+        binding.searchDoctor.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                (binding.listviewCitas.adapter as? AppointmentAdapter)?.filter?.filter(s)
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
     }
 
     private fun observeViewModel() {
@@ -97,6 +122,20 @@ class ShowAppointmentFragment : Fragment(), AppointmentAdapter.OnAppointmentList
         view?.let {
             Navigation.findNavController(it)
                 .navigate(R.id.action_showAppointmentFragment_to_editAppointmentFragment)
+        }
+    }
+
+    private fun navigateToReserveAppointmentFragment() {
+        view?.let {
+            Navigation.findNavController(it)
+                .navigate(R.id.action_showAppointmentFragment_to_reserveAppointmentFragment)
+        }
+    }
+
+    private fun navigateToMenuFragment() {
+        view?.let {
+            Navigation.findNavController(it)
+                .navigate(R.id.action_showAppointmentFragment_to_menuFragment)
         }
     }
 

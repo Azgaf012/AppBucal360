@@ -71,6 +71,10 @@
             android:id="@+id/action_showAppointmentFragment_to_editAppointmentFragment"
             app:destination="@id/editAppointmentFragment" />
 
+        <action
+                android:id="@+id/action_showAppointmentFragment_to_reserveAppointmentFragment"
+                app:destination="@id/reserveAppointmentFragment" />
+
     </fragment>
 
     <fragment

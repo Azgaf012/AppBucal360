@@ -4,11 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
 import com.dapm.appbucal360.R
 import com.dapm.appbucal360.model.appointment.Appointment
+import com.dapm.appbucal360.model.doctor.Doctor
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -16,7 +15,9 @@ class AppointmentAdapter(
     context: Context,
     appointments: MutableList<Appointment>,
     private val listener: OnAppointmentListener
-) : ArrayAdapter<Appointment>(context, 0, appointments) {
+) : ArrayAdapter<Appointment>(context, 0, appointments), Filterable {
+
+    private val allAppointments = ArrayList(appointments)
 
     interface OnAppointmentListener {
         fun onEdit(appointment: Appointment)
@@ -66,5 +67,36 @@ class AppointmentAdapter(
     fun removeAppointment(appointment: Appointment) {
         remove(appointment)
         notifyDataSetChanged()
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val filteredList: MutableList<Appointment> = ArrayList()
+
+                if (constraint == null || constraint.isEmpty()) {
+                    filteredList.addAll(allAppointments)
+                } else {
+                    val filterPattern = constraint.toString().lowercase(Locale.getDefault()).trim { it <= ' ' }
+
+                    for (appointment in allAppointments) {
+                        if (appointment.doctor?.name?.lowercase(Locale.getDefault())?.contains(filterPattern) == true) {
+                            filteredList.add(appointment)
+                        }
+                    }
+                }
+
+                val results = FilterResults()
+                results.values = filteredList
+                return results
+            }
+
+            @Suppress("UNCHECKED_CAST")
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                clear()
+                addAll(results?.values as List<Appointment>)
+                notifyDataSetChanged()
+            }
+        }
     }
 }
