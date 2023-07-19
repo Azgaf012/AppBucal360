@@ -43,4 +43,18 @@ class UserRepository @Inject constructor(){
             LoggedInUser(user?.uid ?: "", user?.email ?: "")
         }
     }
+
+    fun logout(): Result<Boolean> {
+        return runCatching {
+            // Sign out the user.
+            auth.signOut()
+
+            // Check if the user is signed out.
+            if (auth.currentUser == null) {
+                true
+            } else {
+                throw IllegalStateException("El usuario no pudo cerrar sesión")
+            }
+        }
+    }
 }

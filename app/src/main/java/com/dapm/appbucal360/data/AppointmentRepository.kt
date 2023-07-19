@@ -20,9 +20,31 @@ class AppointmentRepository @Inject constructor() {
     ): Result<Appointment> {
         return try {
             val id = UUID.randomUUID()
+
+            // Parse the date
             val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-            val parsedDate = format.parse(date)
-            val appointment = Appointment(id.toString(), parsedDate, doctor, patient, time)
+            val dateObj = format.parse(date)
+
+            // Parse the time
+            val timeFormat = SimpleDateFormat("HH:mm")
+            val timeObj = timeFormat.parse(time)
+
+            // Create a calendar from the date
+            val dateCalendar = Calendar.getInstance()
+            dateCalendar.time = dateObj
+
+            // Create a calendar from the time
+            val timeCalendar = Calendar.getInstance()
+            timeCalendar.time = timeObj
+
+            // Combine the date and time into a single calendar
+            dateCalendar.set(Calendar.HOUR_OF_DAY, timeCalendar.get(Calendar.HOUR_OF_DAY))
+            dateCalendar.set(Calendar.MINUTE, timeCalendar.get(Calendar.MINUTE))
+
+            // Convert the calendar to a Date
+            val finalDate = dateCalendar.time
+
+            val appointment = Appointment(id.toString(), finalDate, doctor, patient, time)
             db.collection("citas").document(id.toString()).set(appointment).await()
             Result.success(appointment)
         } catch (e: Exception) {

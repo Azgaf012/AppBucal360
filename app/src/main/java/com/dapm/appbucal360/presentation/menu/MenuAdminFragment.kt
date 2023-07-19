@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.dapm.appbucal360.R
 import com.dapm.appbucal360.presentation.common.SharedViewModel
@@ -15,6 +16,7 @@ import com.dapm.appbucal360.presentation.common.SharedViewModel
 class MenuAdminFragment : Fragment() {
 
     private val userViewModel: SharedViewModel by activityViewModels()
+    private val viewModelMenuAdmin: MenuAdminViewModel by viewModels()
 
     companion object {
         fun newInstance() = MenuAdminFragment()
@@ -39,6 +41,14 @@ class MenuAdminFragment : Fragment() {
 
         listDoctors.setOnClickListener {
             val action = MenuAdminFragmentDirections.actionMenuAdminFragmentToAdminDoctorsFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
+
+        val logout = view.findViewById<ImageButton>(R.id.buttonSessionClose)
+        logout.setOnClickListener {
+            viewModelMenuAdmin.logout()
+
+            val action = MenuFragmentDirections.actionMenuFragmentToLoginFragment()
             Navigation.findNavController(view).navigate(action)
         }
     }

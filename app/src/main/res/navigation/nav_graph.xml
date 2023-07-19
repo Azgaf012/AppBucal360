@@ -41,6 +41,10 @@
         <action
             android:id="@+id/action_menuFragment_to_reserveAppointmentFragment"
             app:destination="@id/reserveAppointmentFragment" />
+
+        <action
+                android:id="@+id/action_menuFragment_to_loginFragment"
+                app:destination="@id/loginFragment" />
     </fragment>
 
     <fragment
